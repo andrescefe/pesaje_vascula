@@ -586,7 +586,7 @@ public boolean flag;
                     String value3 = cboAcceso.getItemAt(acceso);
                     
                     // la idea es mostrar el id_cliente pero no editable
-                    String sql= "update Users set username='"+value2+"',perfil='"+value3+"', nombre='"+value1+"' "
+                    String sql= "update Users set username='"+value2+"',perfil='"+value3+"', nombre='"+value1+"'  "
                             + "where id='"+value0+"' ";
 
                     pst=conn.prepareStatement(sql);
