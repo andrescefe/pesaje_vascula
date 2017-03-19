@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -51,5 +52,32 @@ public class General {
 
             }
         }
+    }
+    
+     public int getIdInsert(PreparedStatement pst){
+        
+        int id = 0;
+        
+        try{
+            rs = pst.getGeneratedKeys();
+            if(rs.next()){
+                id = rs.getInt(1);
+            }
+        }catch(Exception ex){
+            JOptionPane.showConfirmDialog(null, ex);
+        }
+        
+        finally {
+
+            try{
+                rs.close();
+//                st.close();
+            }
+            catch(Exception e){
+
+            }
+        }
+        
+        return id;
     }
 }

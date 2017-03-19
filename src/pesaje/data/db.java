@@ -18,7 +18,7 @@ public class db {
         
         try{
             Class.forName("org.sqlite.JDBC");
-            Connection conn =DriverManager.getConnection("jdbc:sqlite:D:\\Desarrollo_Java\\Vascula2\\studentInfo.sqlite");
+            Connection conn =DriverManager.getConnection("jdbc:sqlite:C:\\db\\vascula\\studentInfo.sqlite");
             //JOptionPane.showMessageDialog(null, "Connection to database is successful");
       
             return conn;

@@ -11,6 +11,7 @@ package pesaje.data;
  * @author Hyrex
  */
 import Controladores.ProductoController;
+import Controladores.UsuarioController;
 import net.proteanit.sql.DbUtils;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -31,7 +32,7 @@ import javax.swing.table.DefaultTableModel;
 
 
 
-public class Productos extends javax.swing.JFrame {
+public class Usuarios extends javax.swing.JFrame {
 Connection conn=null;
 ResultSet rs=null;
 PreparedStatement pst=null;
@@ -39,7 +40,7 @@ public boolean flag;
     /**
      * Creates new form Staff_details
      */
-    public Productos() {
+    public Usuarios() {
         initComponents();
         conn=db.java_db();
         Toolkit toolkit = getToolkit();
@@ -75,10 +76,10 @@ public boolean flag;
    
  private void Update_table() {
     try{
-        String sql ="select * from Producto";
+        String sql ="select * from Users";
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
-        producto_table.setModel(DbUtils.resultSetToTableModel(rs));
+        usuario_tabla.setModel(DbUtils.resultSetToTableModel(rs));
     }
     catch(Exception e){
     JOptionPane.showMessageDialog(null, e);
@@ -99,8 +100,9 @@ public boolean flag;
     private void clear(){
     
         txt_id.setText("");
-        txt_categoria.setText("");
-        txt_nombre_p.setText("");
+        txt_username.setText("");
+        txt_nombre.setText("");
+        txt_clave.setText("");
         
 //        lbl_img.setIcon(null);
         txt_search1.setText("");
@@ -121,18 +123,24 @@ public boolean flag;
         jDialog1 = new javax.swing.JDialog();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txt_categoria = new javax.swing.JTextField();
+        txt_username = new javax.swing.JTextField();
         cmd_save = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        txt_nombre_p = new javax.swing.JTextField();
+        txt_nombre = new javax.swing.JTextField();
         txt_id = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        producto_table = new javax.swing.JTable();
+        usuario_tabla = new javax.swing.JTable();
         cboSelec = new javax.swing.JComboBox<>();
         txtBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
+        txt_clave = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        cboEstado = new javax.swing.JComboBox<>();
+        cboAcceso = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         txt_emp = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -162,13 +170,13 @@ public boolean flag;
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Información Productos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Adobe Arabic", 1, 36))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gestión de Usuarios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Adobe Arabic", 1, 36))); // NOI18N
 
-        jLabel1.setText("Categoria :");
+        jLabel1.setText("Username :");
 
-        txt_categoria.addActionListener(new java.awt.event.ActionListener() {
+        txt_username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_categoriaActionPerformed(evt);
+                txt_usernameActionPerformed(evt);
             }
         });
 
@@ -201,7 +209,7 @@ public boolean flag;
         txt_id.setEditable(false);
         txt_id.setEnabled(false);
 
-        producto_table.setModel(new javax.swing.table.DefaultTableModel(
+        usuario_tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -212,12 +220,12 @@ public boolean flag;
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        producto_table.addMouseListener(new java.awt.event.MouseAdapter() {
+        usuario_tabla.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                producto_tableMouseClicked(evt);
+                usuario_tablaMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(producto_table);
+        jScrollPane1.setViewportView(usuario_tabla);
 
         cboSelec.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         cboSelec.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Codigo" }));
@@ -251,6 +259,34 @@ public boolean flag;
             }
         });
 
+        txt_clave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_claveActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Clave :");
+
+        cboEstado.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        cboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
+        cboEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboEstadoActionPerformed(evt);
+            }
+        });
+
+        cboAcceso.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        cboAcceso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "UsuarioC" }));
+        cboAcceso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboAccesoActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Acceso :");
+
+        jLabel12.setText("Estado :");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -260,16 +296,27 @@ public boolean flag;
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel5))
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel1)
+                                        .addComponent(jLabel5))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(txt_username)
+                                        .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txt_id, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel12))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txt_categoria)
-                                    .addComponent(txt_nombre_p, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(txt_id, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cboAcceso, 0, 168, Short.MAX_VALUE)
+                                    .addComponent(cboEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txt_clave))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
@@ -284,7 +331,7 @@ public boolean flag;
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBuscar)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGap(14, 14, 14))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,13 +339,25 @@ public boolean flag;
                 .addGap(65, 65, 65)
                 .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5)
-                    .addComponent(txt_nombre_p, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txt_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txt_clave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(cboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cboAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmd_save, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -320,7 +379,7 @@ public boolean flag;
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Adobe Arabic", 1, 14))); // NOI18N
 
-        jLabel13.setText("Producto Id :");
+        jLabel13.setText("Usuario Id :");
 
         txt_search1.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentRemoved(java.awt.event.ContainerEvent evt) {
@@ -418,16 +477,35 @@ public boolean flag;
         
         if(flag){
             
+            if (txt_nombre.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null,"Debe ingresar un nombre para el usuario");
+                return;
+            }
+            
+            if (txt_username.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null,"Debe ingresar un nombre de usuario");
+                return;
+            }
+            
+            if (txt_clave.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null,"Debe ingresar una clave");
+                return;
+            }
+            
+            
             int p = JOptionPane.showConfirmDialog(null, "Realmente desea adicionar el registro?","Adicionar registro",JOptionPane.YES_NO_OPTION);
             if(p==0){
 
                 try {
-                    String sql ="insert into Producto " 
-                            + "(nombre,categoria) values(?,?) ";
-
+                    String sql ="insert into Users " 
+                            + "(username,password,perfil, nombre) values(?,?,?,?) ";
+                    
+                    int acceso = cboAcceso.getSelectedIndex();
                     pst=conn.prepareStatement(sql);
-                    pst.setString(1,txt_nombre_p.getText());
-                    pst.setString(2,txt_categoria.getText());
+                    pst.setString(1,txt_username.getText());
+                    pst.setString(2,txt_clave.getText());
+                    pst.setString(3,cboAcceso.getItemAt(acceso));
+                    pst.setString(4,txt_nombre.getText());
                   
     //                pst.setBytes(7,person_image);
     //                pst.setString(8,gender); 
@@ -435,15 +513,6 @@ public boolean flag;
 
                     pst.execute();
                     JOptionPane.showMessageDialog(null,"Datos gravados con exito");
-                    ProductoController producto = new ProductoController();
-                    int id = producto.getIdInsert(pst);
-                    
-                    MainMenu.cmo_producto.addItem(
-                        new ProductoController(
-                            String.valueOf(id),
-                            txt_nombre_p.getText()
-                        )
-                    );
                     clear();
 
                 }
@@ -478,7 +547,7 @@ public boolean flag;
                     try{
 
                     String reg= "insert into Audit (emp_id, date, status) values "
-                                + "('"+val+"','"+value0+" / "+value1+"','Added Record')";
+                                + "('"+val+"','"+value0+" / "+value1+"','Adiciona Usuario '"+txt_username.getText()+")";
                     pst=conn.prepareStatement(reg);
                     pst.execute();
 
@@ -511,13 +580,14 @@ public boolean flag;
                 try{
 
                     String value0 = txt_id.getText();
-                    String value4 = txt_nombre_p.getText();
-                    String value1 = txt_categoria.getText();
+                    String value1 = txt_nombre.getText();
+                    String value2 = txt_username.getText();
+                    int acceso    = cboAcceso.getSelectedIndex();
+                    String value3 = cboAcceso.getItemAt(acceso);
                     
-
                     // la idea es mostrar el id_cliente pero no editable
-                    String sql= "update Producto set nombre='"+value4+"',categoria='"+value1+"' "
-                            + "where id_producto='"+value0+"' ";
+                    String sql= "update Users set username='"+value2+"',perfil='"+value3+"', nombre='"+value1+"' "
+                            + "where id='"+value0+"' ";
 
                     pst=conn.prepareStatement(sql);
                     pst.execute();
@@ -566,9 +636,9 @@ public boolean flag;
         Update_table();
     }//GEN-LAST:event_cmd_saveActionPerformed
 
-    private void txt_categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_categoriaActionPerformed
+    private void txt_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_usernameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_categoriaActionPerformed
+    }//GEN-LAST:event_txt_usernameActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -664,10 +734,10 @@ public boolean flag;
             txt_id.setText(add0);
 
             String add1 =rs.getString("nombre");
-            txt_nombre_p.setText(add1);
+            txt_nombre.setText(add1);
 
             String add2 =rs.getString("categoria");
-            txt_categoria.setText(add2);
+            txt_username.setText(add2);
 //           
 //
 //            byte[] img = rs.getBytes("Image");
@@ -691,25 +761,25 @@ public boolean flag;
         }
     }//GEN-LAST:event_txt_search1KeyReleased
 
-    private void producto_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_producto_tableMouseClicked
+    private void usuario_tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usuario_tablaMouseClicked
         // TODO add your handling code here:
         flag = false; // menampilkan data ke textboxt
         try {
-            int row =producto_table.getSelectedRow();
-            String sql ="select * from Producto where id_producto=? ";
-            String tabel_klik=(producto_table.getModel().getValueAt(row, 0).toString());
+            int row =usuario_tabla.getSelectedRow();
+            String sql ="select * from Users where id=? ";
+            String tabel_klik=(usuario_tabla.getModel().getValueAt(row, 0).toString());
             pst=conn.prepareStatement(sql);
             pst.setString(1,tabel_klik);
             rs=pst.executeQuery();
             
-            String add0 = rs.getString("id_producto");
+            String add0 = rs.getString("id");
             txt_id.setText(add0);
 
             String add1 =rs.getString("nombre");
-            txt_nombre_p.setText(add1);
+            txt_nombre.setText(add1);
 
-            String add2 =rs.getString("categoria");
-            txt_categoria.setText(add2);
+            String add2 =rs.getString("username");
+            txt_username.setText(add2);
             
 //            java.sql.Connection conn =(java.sql.Connection)delta.koneksi.koneksiDB();
 //            java.sql.Statement stm = conn.createStatement();
@@ -743,7 +813,7 @@ public boolean flag;
 
             }
         }
-    }//GEN-LAST:event_producto_tableMouseClicked
+    }//GEN-LAST:event_usuario_tablaMouseClicked
 
     private void cboSelecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboSelecActionPerformed
         if (cboSelec.getSelectedItem() == "Nombre") {
@@ -783,7 +853,7 @@ public boolean flag;
                 modelo = funcion.mostrar(buscar);
             }
 
-            producto_table.setModel(modelo);
+            usuario_tabla.setModel(modelo);
             // ocultar_columnas();
             //  lblTotalRegistros.setText("Cantidad de Registros : " + Integer.toString(funcion.totalRegistros));
         } catch (Exception e) {
@@ -794,6 +864,18 @@ public boolean flag;
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarActionPerformed
+
+    private void txt_claveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_claveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_claveActionPerformed
+
+    private void cboEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboEstadoActionPerformed
+        cboEstado.transferFocus();
+    }//GEN-LAST:event_cboEstadoActionPerformed
+
+    private void cboAccesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboAccesoActionPerformed
+
+    }//GEN-LAST:event_cboAccesoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -863,6 +945,8 @@ public boolean flag;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JComboBox<String> cboAcceso;
+    private javax.swing.JComboBox<String> cboEstado;
     private javax.swing.JComboBox<String> cboSelec;
     private javax.swing.JButton cmd_save;
     private javax.swing.JButton jButton1;
@@ -870,7 +954,10 @@ public boolean flag;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -881,13 +968,14 @@ public boolean flag;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenu lbl_date;
     private javax.swing.JMenu lbl_time;
-    private javax.swing.JTable producto_table;
     private javax.swing.JTextField txtBuscar;
-    private javax.swing.JTextField txt_categoria;
+    private javax.swing.JTextField txt_clave;
     private javax.swing.JLabel txt_emp;
     private javax.swing.JTextField txt_id;
-    private javax.swing.JTextField txt_nombre_p;
+    private javax.swing.JTextField txt_nombre;
     private javax.swing.JTextField txt_search1;
+    private javax.swing.JTextField txt_username;
+    private javax.swing.JTable usuario_tabla;
     // End of variables declaration//GEN-END:variables
      
     private ImageIcon format =null;

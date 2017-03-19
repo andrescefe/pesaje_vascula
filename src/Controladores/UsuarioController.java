@@ -12,12 +12,13 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import pesaje.data.db;
+import utilitis.General;
 
 /**
  *
  * @author andrescefe
  */
-public class UsuarioController {
+public class UsuarioController extends General {
     
     Connection conn=db.java_db();
     Statement st=null;

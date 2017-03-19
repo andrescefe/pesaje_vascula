@@ -1,7 +1,6 @@
 package pesaje.data;
 
-import Datos.Dusuario;
-import Funciones.Fusuario;
+import Controladores.UsuarioController;
 import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -10,15 +9,15 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-public final class FrmUsuario extends javax.swing.JInternalFrame {
+public final class FrmUsuario extends javax.swing.JFrame {
 
     public FrmUsuario() {
         initComponents();
         inhabilitar();
         mostrar("");
-        BasicInternalFrameUI bi = (BasicInternalFrameUI) this.getUI();
-        bi.setNorthPane(null);
-        this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+//        BasicInternalFrameUI bi = (BasicInternalFrameUI) this.getUI();
+//        bi.setNorthPane(null);
+//        this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
     
 
         jTabla.getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer() {
@@ -48,9 +47,6 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
 
         txtCod_persona.setVisible(false);
         txtNombre_persona.setEditable(false);
-        txtDireccion.setEditable(false);
-        txtTelefono.setEditable(false);
-        txtEmail.setEditable(false);
 
         txtRut.setEditable(false);
         txtLogin.setEditable(false);
@@ -68,9 +64,6 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
 
         txtCod_persona.setText("");
         txtNombre_persona.setText("");
-        txtDireccion.setText("");
-        txtTelefono.setText("");
-        txtEmail.setText("");
 
         txtRut.setText("");
         txtLogin.setText("");
@@ -82,9 +75,6 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
     public void habilitar() {
 
         txtNombre_persona.setEditable(true);
-        txtDireccion.setEditable(true);
-        txtTelefono.setEditable(true);
-        txtEmail.setEditable(true);
 
         txtRut.setEditable(true);
         txtLogin.setEditable(true);
@@ -102,9 +92,6 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
 
         txtCod_persona.setText("");
         txtNombre_persona.setText("");
-        txtDireccion.setText("");
-        txtTelefono.setText("");
-        txtEmail.setText("");
 
         txtRut.setText("");
         txtLogin.setText("");
@@ -116,7 +103,7 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
     public void mostrar(String buscar) {
         try {
             DefaultTableModel modelo;
-            Fusuario func = new Fusuario();
+            UsuarioController func = new UsuarioController();
             modelo = func.mostrar(buscar);
 
             jTabla.setModel(modelo);
@@ -133,7 +120,6 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTabla = jTabla = new javax.swing.JTable(){
@@ -154,15 +140,6 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
         txtPassword = new javax.swing.JTextField();
         txtLogin = new javax.swing.JTextField();
         txtRut = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         btnEditar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
@@ -175,21 +152,10 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
         txtCod_persona = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
 
-        setClosable(true);
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setIconifiable(true);
-        setMaximizable(true);
         setPreferredSize(new java.awt.Dimension(828, 547));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.setPreferredSize(new java.awt.Dimension(822, 521));
-
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImanegesMenuBar/CErrar2.png"))); // NOI18N
-        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel12MouseClicked(evt);
-            }
-        });
 
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(822, 479));
@@ -289,7 +255,6 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
             }
         });
 
-        txtRut.setBackground(new java.awt.Color(36, 33, 33));
         txtRut.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         txtRut.setForeground(new java.awt.Color(207, 207, 207));
         txtRut.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(207, 207, 207)));
@@ -299,33 +264,6 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
                 txtRutActionPerformed(evt);
             }
         });
-
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesForm/login.png"))); // NOI18N
-        jLabel16.setText(" ");
-
-        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesForm/password.png"))); // NOI18N
-        jLabel18.setText(" ");
-
-        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesForm/acceso.png"))); // NOI18N
-        jLabel17.setText(" ");
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesForm/usuarioA.png"))); // NOI18N
-        jLabel1.setText(" ");
-
-        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesForm/direccion.png"))); // NOI18N
-        jLabel21.setText(" ");
-
-        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesForm/telefono.png"))); // NOI18N
-        jLabel22.setText(" ");
-
-        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesForm/email.png"))); // NOI18N
-        jLabel23.setText(" ");
-
-        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesForm/identificacion.png"))); // NOI18N
-        jLabel24.setText(" ");
-
-        jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesForm/estado.png"))); // NOI18N
-        jLabel25.setText(" ");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -348,21 +286,7 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
                     .addComponent(txtRut, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtLogin, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cboAcceso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(16, 16, 16)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel16)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel22)
-                                .addComponent(jLabel23)
-                                .addComponent(jLabel24)
-                                .addComponent(jLabel21)
-                                .addComponent(jLabel1))
-                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabel25, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(49, 49, 49))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -372,19 +296,8 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(txtNombre_persona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(18, 23, Short.MAX_VALUE)
-                        .addComponent(jLabel21)
-                        .addGap(18, 24, Short.MAX_VALUE)
-                        .addComponent(jLabel22)
-                        .addGap(18, 24, Short.MAX_VALUE)
-                        .addComponent(jLabel23)
-                        .addGap(18, 24, Short.MAX_VALUE)
-                        .addComponent(jLabel24)
-                        .addGap(18, 24, Short.MAX_VALUE)
-                        .addComponent(jLabel16)
-                        .addGap(18, 23, Short.MAX_VALUE))
+                            .addComponent(txtNombre_persona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
@@ -405,13 +318,7 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
                             .addComponent(cboAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addComponent(jLabel18)
-                .addGap(18, 27, Short.MAX_VALUE)
-                .addComponent(jLabel25)
-                .addGap(18, 28, Short.MAX_VALUE)
-                .addComponent(jLabel17)
-                .addContainerGap(17, Short.MAX_VALUE))
+                        .addContainerGap(121, Short.MAX_VALUE))))
         );
 
         jPanel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -419,7 +326,6 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
 
         btnEditar.setBackground(new java.awt.Color(36, 33, 33));
         btnEditar.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesForm/editar.png"))); // NOI18N
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -429,7 +335,6 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
 
         btnGuardar.setBackground(new java.awt.Color(36, 33, 33));
         btnGuardar.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesForm/guardar.png"))); // NOI18N
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -439,7 +344,6 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
 
         btnNuevo.setBackground(new java.awt.Color(36, 33, 33));
         btnNuevo.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesForm/nuevo.png"))); // NOI18N
         btnNuevo.setText("Nuevo");
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -484,7 +388,6 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
 
         btnEliminar.setBackground(new java.awt.Color(36, 33, 33));
         btnEliminar.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesForm/eliminar.png"))); // NOI18N
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -494,7 +397,6 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
 
         btnBuscar.setBackground(new java.awt.Color(36, 33, 33));
         btnBuscar.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesForm/buscar.png"))); // NOI18N
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
@@ -549,7 +451,7 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -557,7 +459,7 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -581,33 +483,29 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
                 .addComponent(jLabel19)
                 .addGap(288, 288, 288)
                 .addComponent(txtCod_persona, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(jLabel12)
-                .addGap(19, 19, 19))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 911, Short.MAX_VALUE)
+                .addGap(48, 48, 48))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 903, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtCod_persona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel19))
-                    .addComponent(jLabel12))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCod_persona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 915, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 907, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)
         );
 
         pack();
@@ -631,13 +529,13 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
 
             if (!txtCod_persona.getText().equals("")) {
 
-                Fusuario funcion = new Fusuario();
-                Dusuario datos = new Dusuario();
+//                Fusuario funcion = new Fusuario();
+//                Dusuario datos = new Dusuario();
 
-                datos.setCod_persona(Integer.parseInt(txtCod_persona.getText()));
-                funcion.eliminar(datos);
-                mostrar("");
-                inhabilitar();
+//                datos.setCod_persona(Integer.parseInt(txtCod_persona.getText()));
+//                funcion.eliminar(datos);
+//                mostrar("");
+//                inhabilitar();
 
             } else {
 
@@ -670,12 +568,6 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
             return;
         }
 
-        if (txtDireccion.getText().length() == 0) {
-            JOptionPane.showMessageDialog(null, "Debes ingresar una Direccion");
-            txtDireccion.requestFocus();
-            return;
-        }
-
         if (txtRut.getText().length() == 0) {
             JOptionPane.showMessageDialog(null, "Debes ingresar un N° de Cedula");
             txtRut.requestFocus();
@@ -694,41 +586,38 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
             return;
         }
 
-        Dusuario datos = new Dusuario();
-        Fusuario funcion = new Fusuario();
-        int login = funcion.verificarLogin();
-        if (login == 1) {
-            JOptionPane.showMessageDialog(null, "Este Login : " + txtLogin.getText() + " ya esta ocupado por otro usuario.");
-            txtLogin.setText("");
-            txtLogin.requestFocus();
-            return;
-
-        }
-
-        datos.setNombre_persona(txtNombre_persona.getText());
-        datos.setDireccion(txtDireccion.getText());
-        datos.setTelefono(txtTelefono.getText());
-        datos.setEmail(txtEmail.getText());
-
-        datos.setRut_usuario(txtRut.getText());
-        datos.setLogin(txtLogin.getText());
-        datos.setPassword(txtPassword.getText());
-
-        int estado = cboEstado.getSelectedIndex();
-        datos.setEstado((String) cboEstado.getItemAt(estado));
-
-        int acceso = cboAcceso.getSelectedIndex();
-        datos.setAcceso((String) cboAcceso.getItemAt(acceso));
-
-        if (funcion.insertar(datos)) {
-            JOptionPane.showMessageDialog(null, "El trabajador fue ingresado al sistema");
-            mostrar("");
-            inhabilitar();
-        } else {
-            JOptionPane.showMessageDialog(null, "NO se ingresador Datos");
-            mostrar("");
-
-        }
+//        Dusuario datos = new Dusuario();
+//        Fusuario funcion = new Fusuario();
+//        int login = funcion.verificarLogin();
+//        if (login == 1) {
+//            JOptionPane.showMessageDialog(null, "Este Login : " + txtLogin.getText() + " ya esta ocupado por otro usuario.");
+//            txtLogin.setText("");
+//            txtLogin.requestFocus();
+//            return;
+//
+//        }
+//
+//        datos.setNombre_persona(txtNombre_persona.getText());
+//
+//        datos.setRut_usuario(txtRut.getText());
+//        datos.setLogin(txtLogin.getText());
+//        datos.setPassword(txtPassword.getText());
+//
+//        int estado = cboEstado.getSelectedIndex();
+//        datos.setEstado((String) cboEstado.getItemAt(estado));
+//
+//        int acceso = cboAcceso.getSelectedIndex();
+//        datos.setAcceso((String) cboAcceso.getItemAt(acceso));
+//
+//        if (funcion.insertar(datos)) {
+//            JOptionPane.showMessageDialog(null, "El trabajador fue ingresado al sistema");
+//            mostrar("");
+//            inhabilitar();
+//        } else {
+//            JOptionPane.showMessageDialog(null, "NO se ingresador Datos");
+//            mostrar("");
+//
+//        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -738,12 +627,6 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
             return;
         }
 
-        if (txtDireccion.getText().length() == 0) {
-            JOptionPane.showMessageDialog(null, "Debes ingresar una Direccion");
-            txtDireccion.requestFocus();
-            return;
-        }
-
         if (txtRut.getText().length() == 0) {
             JOptionPane.showMessageDialog(null, "Debes ingresar un N° de Cedula");
             txtRut.requestFocus();
@@ -762,35 +645,32 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
             return;
         }
 
-        Dusuario datos = new Dusuario();
-        Fusuario funcion = new Fusuario();
-
-        datos.setNombre_persona(txtNombre_persona.getText());
-        datos.setDireccion(txtDireccion.getText());
-        datos.setTelefono(txtTelefono.getText());
-        datos.setEmail(txtEmail.getText());
-
-        datos.setRut_usuario(txtRut.getText());
-        datos.setLogin(txtLogin.getText());
-        datos.setPassword(txtPassword.getText());
-
-        int estado = cboEstado.getSelectedIndex();
-        datos.setEstado((String) cboEstado.getItemAt(estado));
-
-        int acceso = cboAcceso.getSelectedIndex();
-        datos.setAcceso((String) cboAcceso.getItemAt(acceso));
-
-        datos.setCod_persona(Integer.parseInt(txtCod_persona.getText()));
-
-        if (funcion.editar(datos)) {
-            JOptionPane.showMessageDialog(null, "El trabajador fue EDITADO");
-            mostrar("");
-            inhabilitar();
-        } else {
-            JOptionPane.showMessageDialog(null, "NO se EDITARON Datos");
-            mostrar("");
-
-        }
+//        Dusuario datos = new Dusuario();
+//        Fusuario funcion = new Fusuario();
+//
+//        datos.setNombre_persona(txtNombre_persona.getText());
+//        
+//        datos.setRut_usuario(txtRut.getText());
+//        datos.setLogin(txtLogin.getText());
+//        datos.setPassword(txtPassword.getText());
+//
+//        int estado = cboEstado.getSelectedIndex();
+//        datos.setEstado((String) cboEstado.getItemAt(estado));
+//
+//        int acceso = cboAcceso.getSelectedIndex();
+//        datos.setAcceso((String) cboAcceso.getItemAt(acceso));
+//
+//        datos.setCod_persona(Integer.parseInt(txtCod_persona.getText()));
+//
+//        if (funcion.editar(datos)) {
+//            JOptionPane.showMessageDialog(null, "El trabajador fue EDITADO");
+//            mostrar("");
+//            inhabilitar();
+//        } else {
+//            JOptionPane.showMessageDialog(null, "NO se EDITARON Datos");
+//            mostrar("");
+//
+//        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void txtRutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRutActionPerformed
@@ -839,9 +719,6 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
 
         txtCod_persona.setText(jTabla.getValueAt(fila, 0).toString());
         txtNombre_persona.setText(jTabla.getValueAt(fila, 1).toString());
-        txtDireccion.setText(jTabla.getValueAt(fila, 2).toString());
-        txtTelefono.setText(jTabla.getValueAt(fila, 3).toString());
-        txtEmail.setText(jTabla.getValueAt(fila, 4).toString());
 
         txtRut.setText(jTabla.getValueAt(fila, 5).toString());
         txtLogin.setText(jTabla.getValueAt(fila, 6).toString());
@@ -850,10 +727,6 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
         cboEstado.setSelectedItem(jTabla.getValueAt(fila, 8).toString());
         cboAcceso.setSelectedItem(jTabla.getValueAt(fila, 9).toString());
     }//GEN-LAST:event_jTablaMouseClicked
-
-    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
-        this.dispose();
-    }//GEN-LAST:event_jLabel12MouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -896,21 +769,11 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnNuevo;
     private javax.swing.JComboBox<String> cboAcceso;
     private javax.swing.JComboBox<String> cboEstado;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -923,7 +786,7 @@ public final class FrmUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTabla;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtCod_persona;
-    private javax.swing.JTextField txtLogin;
+    public static javax.swing.JTextField txtLogin;
     private javax.swing.JTextField txtNombre_persona;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtRut;
