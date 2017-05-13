@@ -69,7 +69,7 @@ PreparedStatement pst=null;
         jButton1 = new javax.swing.JButton();
         txt_username = new javax.swing.JTextField();
         txt_password = new javax.swing.JPasswordField();
-        txt_combo = new javax.swing.JComboBox<String>();
+        txt_combo = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -102,7 +102,7 @@ PreparedStatement pst=null;
         jPanel1.add(txt_password);
         txt_password.setBounds(90, 310, 160, 30);
 
-        txt_combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Admin" }));
+        txt_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin" }));
         jPanel1.add(txt_combo);
         txt_combo.setBounds(90, 350, 160, 30);
 
@@ -114,10 +114,10 @@ PreparedStatement pst=null;
         jPanel1.add(jLabel1);
         jLabel1.setBounds(0, 0, 660, 430);
 
-        txt_date.setText("Date");
+        txt_date.setText("Fecha");
         jMenuBar1.add(txt_date);
 
-        txt_time.setText("Time");
+        txt_time.setText("Hora");
         jMenuBar1.add(txt_time);
 
         setJMenuBar(jMenuBar1);

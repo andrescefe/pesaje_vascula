@@ -76,7 +76,7 @@ public boolean flag;
    
  private void Update_table() {
     try{
-        String sql ="select * from Users";
+        String sql ="select id, nombre, username, perfil from Users";
         pst=conn.prepareStatement(sql);
         rs=pst.executeQuery();
         usuario_tabla.setModel(DbUtils.resultSetToTableModel(rs));
@@ -173,12 +173,6 @@ public boolean flag;
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gestión de Usuarios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Adobe Arabic", 1, 36))); // NOI18N
 
         jLabel1.setText("Username :");
-
-        txt_username.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_usernameActionPerformed(evt);
-            }
-        });
 
         cmd_save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pesaje/imgenes/Save-icon.png"))); // NOI18N
         cmd_save.setText("Adicionar/Editar");
@@ -578,19 +572,37 @@ public boolean flag;
             if(p==0){
 
                 try{
-
-                    String value0 = txt_id.getText();
-                    String value1 = txt_nombre.getText();
-                    String value2 = txt_username.getText();
-                    int acceso    = cboAcceso.getSelectedIndex();
-                    String value3 = cboAcceso.getItemAt(acceso);
+                    String sql;
+//                    String value0 = txt_id.getText();
+//                    String value1 = txt_nombre.getText();
+//                    String value2 = txt_username.getText();
+//                    int acceso    = cboAcceso.getSelectedIndex();
+//                    String value3 = cboAcceso.getItemAt(acceso);
                     
                     // la idea es mostrar el id_cliente pero no editable
-                    String sql= "update Users set username='"+value2+"',perfil='"+value3+"', nombre='"+value1+"'  "
-                            + "where id='"+value0+"' ";
-
+                    if (txt_clave.getText().isEmpty()) {
+                        sql = "update Users set username=?, perfil=?, nombre=? "
+                            + "where id=? ";
+                    }else{
+                        String value4 = txt_clave.getText();
+                        sql = "update Users set username=?, perfil=?, nombre=?, password=? "
+                            + "where id=? ";
+                    }
+                    
+//                    JOptionPane.showMessageDialog(null, sql);
+                    
+                    
                     pst=conn.prepareStatement(sql);
-                    pst.execute();
+                    pst.setString(1,txt_username.getText());
+                    int acces = cboAcceso.getSelectedIndex();
+                    pst.setString(2,cboAcceso.getItemAt(acces));
+                    pst.setString(3,txt_nombre.getText());
+                    
+                    if(!txt_clave.getText().isEmpty()){
+                        pst.setString(4,txt_clave.getText());
+                    }
+                    
+                    pst.executeUpdate();
                     JOptionPane.showMessageDialog(null, "Registro Editado");
 
                 }catch(Exception e){
@@ -609,7 +621,7 @@ public boolean flag;
                 String values = dateString;
                 String val = txt_emp.getText().toString();
                 try{
-                    String reg= "insert into Audit (emp_id, date, status) values ('"+val+"','"+value0+" / "+values+"','Updated Record')";
+                    String reg= "insert into Audit (emp_id, date, status) values ('"+val+"','"+value0+" / "+values+"','Actualiza Usuario '"+txt_username.getText()+"' )";
                     pst=conn.prepareStatement(reg);
                     pst.execute();
                 }
@@ -635,10 +647,6 @@ public boolean flag;
         
         Update_table();
     }//GEN-LAST:event_cmd_saveActionPerformed
-
-    private void txt_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_usernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_usernameActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:

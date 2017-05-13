@@ -28,6 +28,7 @@ import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import panamahitek.Arduino.PanamaHitek_Arduino;
+import panamahitek.Arduino.PanamaHitek_multiMessage;
 import jssc.*;
 import pesaje.data.DbUtils;
 
@@ -42,6 +43,7 @@ public class MainMenu extends javax.swing.JFrame {
     PreparedStatement pst=null;
     
     PanamaHitek_Arduino arduino = new PanamaHitek_Arduino();
+//    PanamaHitek_multiMessage arduino2 = new PanamaHitek_multiMessage();
       SerialPortEventListener evento = new SerialPortEventListener() {
 
         @Override
@@ -50,7 +52,11 @@ public class MainMenu extends javax.swing.JFrame {
             
             try{
 //                if(arduino.isMessageAvailable()){
-                txt_peso.setText(String.valueOf(arduino.receiveData()));    
+//                txt_peso.setText(String.valueOf((arduino.receiveData() - 151)));
+                txt_peso.setText(arduino.printMessage());
+//                txt_peso.setText(new String(new byte[]{Byte.parseByte(String.valueOf(arduino.receiveData()))}));    
+//                  txt_peso.setText(String.valueOf(Character.getNumericValue(arduino.receiveData())));  
+
                 System.out.println(arduino.receiveData());
 //                }
 //                }

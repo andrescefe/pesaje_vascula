@@ -6,12 +6,12 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="txt_date">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Date"/>
+            <Property name="text" type="java.lang.String" value="Fecha"/>
           </Properties>
         </Menu>
         <Menu class="javax.swing.JMenu" name="txt_time">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Time"/>
+            <Property name="text" type="java.lang.String" value="Hora"/>
           </Properties>
         </Menu>
       </SubComponents>
